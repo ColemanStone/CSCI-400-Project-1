@@ -7,4 +7,4 @@ to most current webpages.</p>
 <p>Coleman Stone: @ColemanStone</p>
 <p>Drew Caldwell: @drewdcaldwell</p>
 <p>Ben Earl: @benearl1</p>
-<p>Caleb Vogl: @ginger_npc</p>
+<p>Caleb Vogl: @ctvogl</p>
