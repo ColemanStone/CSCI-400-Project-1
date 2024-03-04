@@ -1,0 +1,21 @@
+<?php
+// This page begins the HTML header for the site.
+session_start();
+// Check for a $page_title value:
+if (!isset($page_title)) {
+	$page_title = 'User Registration';
+}
+?>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset = "utf-8" />
+<title><?php echo $page_title; ?></title>
+<link rel="stylesheet" type="text/css" href="layout.css" />
+</head>
+<body>
+<div id="Header">User Registration</div>
+<div id="Content">
+<!-- End of Header -->
