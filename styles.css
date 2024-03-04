@@ -45,4 +45,21 @@ button {
     justify-content: center;
     gap: 10px;
 }
+div {
+    background-color: transparent; /* Transparent nav for a cohesive look */
+    margin-bottom: 20px;}
+.div-link {
+    margin: 0 10px;
+    padding: 10px 15px;
+    background-color: #007bff; /* For contrast */
+    color: white; /* White text on buttons */
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    z-index: 1;
+    position: relative
+}
+.div-link:hover {
+    background-color: #0056b3;
+    margin-top: 20px;
+}
 

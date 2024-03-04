@@ -1,23 +1,28 @@
-<!-- End of Content -->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
 </div>
 
 <div id="Menu">
-<a href="index.php" title="Home Page">Home</a><br />
-<?php 
-
-// If the user is logged-in, show logout in the menu and change password links
+    <a href="index.php" title="Home Page">Home</a><br />
+    <?php
 if (isset($_SESSION['user_id'])) {
-
 	echo '<a href="logout.php" title="Logout">Logout</a><br />
-          <a href="change_password.php" title="Change Your Password">Change Password</a><br />';
-} else { //  Not logged in.
+    <a href="change_password.php" title="Change Your Password">Change Password</a><br />';
+    } else { //  Not logged in.
 
-	echo '<a href="register.php" title="Register for the Site">Register</a><br />
-         <a href="login.php" title="Login">Login</a><br />
-         <a href="forgot_password.php" title="Password Retrieval">Retrieve Password</a><br />';
-}
-?>
-
+    echo '<a href="register.php" title="Register for the Site">Register</a><br />
+    <a href="login.php" title="Login">Login</a><br />
+    <a href="forgot_password.php" title="Password Retrieval">Retrieve Password</a><br />';
+    }
+    ?>
 </div>
 </body>
 </html>
