@@ -108,39 +108,20 @@ function add_user($pdo, $email, $hash, $first_name, $last_name, $registration_da
 }
 ?>
 	
-<h1>Register</h1>
-<form action="register.php" method="post">
-	<fieldset>
-	
-	<div class="myRow">
-		<label class="labelCol" for="firstName">First Name</label> 
-		<input type="text" name="first_name" size="20" maxlength="20" value="<?php if (isset($trimmed['first_name'])) echo $trimmed['first_name']; ?>" />
-	</div>
-	
-	<div class="myRow">
-		<label class="labelCol" for="lastName">Last Name</label>  
-		<input type="text" name="last_name" size="20" maxlength="40" value="<?php if (isset($trimmed['last_name'])) echo $trimmed['last_name']; ?>" />
-	</div>
-	
-	<div class="myRow">
-		<label class="labelCol" for="email">Email</label>
-		<input type="text" name="email" size="30" maxlength="80" value="<?php if (isset($trimmed['email'])) echo $trimmed['email']; ?>" /> 
-	</div>
-		
-	<div class="myRow">
-		<label class="labelCol" for="passw1">Password</label>
-		<input type="password" name="password1" size="20" maxlength="20" />
-		<small>Use only letters, numbers, and the underscore. Must be between 4 and 20 characters long.</small>
-	</div>
-	
-	<div class="myRow">
-		<label class="labelCol" for="passw2">Confirm Password</label>
-		<input type="password" name="password2" size="20" maxlength="20" />
-	</div>
-	<div class="mySubmit">
-		<input type="submit" name="submit" value="Register" />
-	</div>
-  </fieldset>
+
+<h2>Register</h2>
+<form>
+    <p>First Name: <input type="text" name="registerFirstName" value="<?php if (isset($trimmed['first_name'])) echo $trimmed['first_name']; ?>"></p>
+    <p>Last Name: <input type="text" name="registerLastName" value="<?php if (isset($trimmed['last_name'])) echo $trimmed['last_name']; ?>"></p>
+    <p>E-Mail Address: <input type="text" name = "registerEmail" value="<?php if (isset($trimmed['email'])) echo $trimmed['email']; ?>"></p>
+    <p>Create a Password: <input type = "text" name = "password"></p>
+    <p>Confirm Password: <input type = "text" name = "confirmedPassword"></p>
+    <p><i>(Passwords are case-sensitive and must be at least 6 characters long)</i></p>
+    <div class="button-container">
+        <button type="submit" value="register">Register</button>
+        <button type="reset" value="reset">Reset Form</button>
+    </div>
+    <hr>
 </form>
 
 <?php // Include the HTML footer.
