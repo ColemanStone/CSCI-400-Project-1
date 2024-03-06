@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS owners_cars;
 
 CREATE TABLE owners_cars (
-    UID varchar(40) NOT NULL,
+    OID INTEGER UNSIGNED NOT NULL,
     VID varchar(20) NOT NULL,
     current_price DECIMAL UNSIGNED NOT NULL,
-    PRIMARY KEY(UID, VID),
-    FOREIGN KEY (UID) REFERENCES owners(user_id),
+    PRIMARY KEY(OID, VID),
+    FOREIGN KEY (OID) REFERENCES owners(user_id),
     FOREIGN KEY (VID) REFERENCES cars(vin)
 );
