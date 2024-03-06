@@ -8,19 +8,18 @@
     <title>Document</title>
 </head>
 <body>
-</div>
 
 <div id="Menu">
-    <a href="index.php" title="Home Page">Home</a><br />
+    <a href="index.php" title="Home Page" class="button">Home</a><br />
     <?php
 if (isset($_SESSION['user_id'])) {
 	echo '<a href="logout.php" title="Logout">Logout</a><br />
-    <a href="change_password.php" title="Change Your Password">Change Password</a><br />';
+    <a href="change_password.php" title="Change Your Password" class="button">Change Password</a><br />';
     } else { //  Not logged in.
 
-    echo '<a href="register.php" title="Register for the Site">Register</a><br />
-    <a href="login.php" title="Login">Login</a><br />
-    <a href="forgot_password.php" title="Password Retrieval">Retrieve Password</a><br />';
+    echo '<a href="register.php" title="Register for the Site" class="button">Register</a><br />
+    <a href="login.php" title="Login" class="button">Login</a><br />
+    <a href="forgot_password.php" title="Password Retrieval" class="button">Reset Password</a><br />';
     }
     ?>
 </div>

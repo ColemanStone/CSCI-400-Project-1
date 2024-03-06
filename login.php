@@ -69,7 +69,7 @@ if ($displayForm) {
 		<input type="text" name="email" size="20" maxlength="40" />
 	</div>
 	<div class="myRow">
-		<label class="labelCol" for="[assw">Password</label>
+		<label class="labelCol" for="password">Password</label>
 		<input type="password" name="pass" size="20" maxlength="20" />
     </div>
 	<div class="mySubmit">
