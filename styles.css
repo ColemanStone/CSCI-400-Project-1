@@ -26,11 +26,11 @@ p{
     padding: 0;
     text-align: center;
 }
-
+/*Caleb*/
 button {
     background-color: #000000;
     border: none;
-    color: #ffffff;
+    color: #d8d4d4;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -39,7 +39,7 @@ button {
     margin: 4px 2px;
     cursor: pointer;
     mask-size: 10px;
-}
+} /*Caleb*/
 .button-container {
     display: flex;
     justify-content: center;
