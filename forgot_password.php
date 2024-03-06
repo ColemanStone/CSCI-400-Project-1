@@ -13,11 +13,12 @@ include ('header.html');
 
 
 ?>
-
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
 <h1>Reset Your Password</h1>
 <p>Enter your email address below and your password will be reset.</p> 
 <form action="forgot_password.php" method="post">
-	<link rel="stylesheet" type="text/css" href="style.css">
 	<fieldset>
 		<div class="myRow">
 			<label class="labelCol" for="email">Email Address</label>  
@@ -27,7 +28,6 @@ include ('header.html');
 		<div class="mySubmit"><input type="submit" name="submit" value="Reset My Password" /></div>
 	</fieldset>
 </form>
-
 <?php
 include ('footer.html');
 ?>
