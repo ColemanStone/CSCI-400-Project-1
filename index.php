@@ -2,11 +2,11 @@
 // This is the main page for the site.
 
 // Include the configuration file:
-require_once ('config.php'); 
+require_once('config.php');
 
 // Set the page title and include the HTML header:
 $page_title = 'Welcome to this Site!';
-include ('header.html');
+include('header.html');
 
 // Welcome the user (by name if they are logged in):
 if (isset($_SESSION['user_id'])) {
@@ -16,10 +16,10 @@ if (isset($_SESSION['user_id'])) {
 ?>
 
 <?php
-include ('homepage.html');
+include('homepage.html');
 
- // Include the HTML footer file:
-include ('footer.html');
+// Include the HTML footer file:
+include('footer.html');
 ?>
 
 

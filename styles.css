@@ -61,6 +61,7 @@ button {
 
 /*Caleb*/
 .button-container {
+    color: #ff00f7;
     display: flex;
     justify-content: center;
     gap: 10px;
@@ -87,9 +88,16 @@ a.button:hover {
     background-color: #769d9d;
 }
 
-img {
+div .wrong_password{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+img{
     display: block;
+    margin-left: left;
+    margin-right: left;
     width: 20%;
     height: 20%;
-    float: left;
 }

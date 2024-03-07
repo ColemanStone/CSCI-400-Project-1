@@ -13,21 +13,7 @@ include ('header.html');
 
 
 ?>
-<head>
-	<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<h1>Reset Your Password</h1>
-<p>Enter your email address below and your password will be reset.</p> 
-<form action="forgot_password.php" method="post">
-	<fieldset>
-		<div class="myRow">
-			<label class="labelCol" for="email">Email Address</label>  
-			<input type="text" name="email" size="20" maxlength="40" value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>" />
-		</div>
-
-		<div class="mySubmit"><input type="submit" name="submit" value="Reset My Password" /></div>
-	</fieldset>
-</form>
 <?php
+include ('forgot_password.html');
 include ('footer.html');
 ?>

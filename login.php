@@ -3,6 +3,7 @@
 require_once ('config.php'); 
 $page_title = 'Login Page';
 include ('header.html');
+include ('login.html');
 $displayForm = true;
 
 if (isset($_POST['submit'])) {
@@ -58,28 +59,7 @@ if (isset($_POST['submit'])) {
 	}
 
 } // End of SUBMIT conditional.
-
-if ($displayForm) {
 ?>
-<h1>Login</h1>
-<form action="login.php" method="post">
-	<fieldset>
-	<div class="myRow">
-		<label class="labelCol" for="email">Email</label> 
-		<input type="text" name="email" size="20" maxlength="40" />
-	</div>
-	<div class="myRow">
-		<label class="labelCol" for="password">Password</label>
-		<input type="password" name="pass" size="20" maxlength="20" />
-    </div>
-	<div class="mySubmit">
-		<input type="submit" name="submit" value="Login" /></div>
-	</div>
-	</fieldset>
-</form>
-<?php
-}
-?> 
 <?php // Include the HTML footer.
 include ('footer.html');
 ?>
