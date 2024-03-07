@@ -1,4 +1,4 @@
-body{
+body {
     background-image: url("CarImages.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -8,26 +8,42 @@ body{
     padding: 0;
 }
 
-body h1{
-    color : #333;
+body h1 {
+    color: #ff00f7;
     margin: 0;
     padding: 0;
     text-align: center;
+    font-weight: bold;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #ff00f7;
+    background-color: #000000;
+    padding: 10px;
 }
 
-h2{
-    color : #333;
+h2 {
+    color: #ff00f7;
     margin: 0;
     padding: 0;
     text-align: center;
+    font-weight: bold;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #ff00f7;
+    background-color: #000000;
+    padding: 10px;
 }
 
-p{
-    color : #333;
+p {
+    color: #ff00f7;
     margin: 0;
     padding: 0;
     text-align: center;
+    font-weight: bold;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #ff00f7;
+    background-color: #000000;
+    padding: 10px;
 }
+
 /*Caleb*/
 button {
     background-color: #000000;
@@ -41,7 +57,9 @@ button {
     margin: 4px 2px;
     cursor: pointer;
     mask-size: 10px;
-} /*Caleb*/
+}
+
+/*Caleb*/
 .button-container {
     display: flex;
     justify-content: center;
@@ -68,9 +86,10 @@ a.button {
 a.button:hover {
     background-color: #769d9d;
 }
-img{
+
+img {
+    display: block;
     width: 20%;
     height: 20%;
-    object-fit: cover;
-    object-position: left;
+    float: left;
 }
