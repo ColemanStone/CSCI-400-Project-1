@@ -1,47 +1,41 @@
 body {
-    background-image: url("CarImages.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    font-family: Arial, sans-serif;
+    background-color: #d8d4d4;
+    font-family: 'Times New Roman', Times, serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
 }
 
 body h1 {
-    color: #ff00f7;
+    color: #415959;
     margin: 0;
     padding: 0;
     text-align: center;
     font-weight: bold;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    color: #ff00f7;
-    background-color: #000000;
     padding: 10px;
+    background-color: #b3afaf;
 }
 
 h2 {
-    color: #ff00f7;
+    color: #415959;
     margin: 0;
     padding: 0;
     text-align: center;
     font-weight: bold;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    color: #ff00f7;
-    background-color: #000000;
+    font-family: 'Times New Roman', cursive, sans-serif;
     padding: 10px;
+    background-color: #b3afaf;
 }
 
 p {
-    color: #ff00f7;
+    color: #415959;
     margin: 0;
     padding: 0;
     text-align: center;
     font-weight: bold;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    color: #ff00f7;
-    background-color: #000000;
+    font-family: 'Times New Roman', cursive, sans-serif;
     padding: 10px;
+    background-color: #b3afaf;
 }
 
 /*Caleb*/
@@ -61,14 +55,16 @@ button {
 
 /*Caleb*/
 .button-container {
-    color: #ff00f7;
+    color: #415959;
     display: flex;
     justify-content: center;
     gap: 10px;
 }
 
 a.button {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 10px 20px;
     background-color: #415959;
     color: #fff;
