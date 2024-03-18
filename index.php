@@ -19,7 +19,7 @@ if (isset($_SESSION['user_id'])) {
 include('homepage.html');
 
 // Include the HTML footer file:
-include('footer.html');
+include('footer.php');
 ?>
 
 

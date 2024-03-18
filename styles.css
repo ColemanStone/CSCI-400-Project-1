@@ -97,3 +97,7 @@ img{
     width: 20%;
     height: 20%;
 }
+
+.error{
+    color: rgb(209, 62, 62);
+}

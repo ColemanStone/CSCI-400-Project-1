@@ -11,16 +11,16 @@ if (isset($_POST['submit'])) {
 	$trimmed = array_map('trim', $_POST);
 
 	// Validate the email address:
-	if (!empty($_POST['email'])) {
-		$email = $trimmed['email'];
+	if (!empty($_POST['loginEmail'])) {
+		$email = $trimmed['loginEmail'];
 	} else {
 		$email = FALSE;
 		echo '<p class="error">You forgot to enter your email address!</p>';
 	}
 	
 	// Validate the password:
-	if (!empty($_POST['pass'])) {
-		$password = $trimmed['pass'];
+	if (!empty($_POST['loginPassword'])) {
+		$password = $trimmed['loginPassword'];
 	} else {
 		$password = FALSE;
 		echo '<p class="error">You forgot to enter your password!</p>';
@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
 	
 	if ($email && $password) { // If everything's OK.
 		// Query the database: 
-		$query_user = "SELECT user_id, first_name, email, pass FROM users_table WHERE email='$email'";		
+		$query_user = "SELECT user_id, first_name, email, pass FROM owners WHERE email='$email'";		
 		try {
 			$pdo = new PDO($dsn, $dbUser, $dbPassword);
 		}
@@ -61,5 +61,5 @@ if (isset($_POST['submit'])) {
 } // End of SUBMIT conditional.
 ?>
 <?php // Include the HTML footer.
-include ('footer.html');
+include ('footer.php');
 ?>

@@ -2,8 +2,9 @@
 // This is the registration page for the site, which uses a sticky form
 
 require_once ('config.php');
-$page_title = 'Registeration Main';
+$page_title = 'Registration Main';
 include ('header.html');
+include ('register.html');
 
 if (isset($_POST['submit'])) { // Handle the form.
 
@@ -18,30 +19,30 @@ if (isset($_POST['submit'])) { // Handle the form.
 	$first_name = $last_name = $email = $password = FALSE;
 	
 	// Check for a first name:
-	if (preg_match ('/^[A-Z \'.-]{2,20}$/i', $trimmed['first_name'])) {
-		$first_name = $trimmed['first_name'];
+	if (preg_match ('/^[A-Z \'.-]{2,20}$/i', $trimmed['registerFirstName'])) {
+		$first_name = $trimmed['registerFirstName'];
 	} else {
 		echo '<p class="error">Please enter your first name!</p>';
 	}
 	
 	// Check for a last name:
-	if (preg_match ('/^[A-Z \'.-]{2,40}$/i', $trimmed['last_name'])) {
-		$last_name = $trimmed['last_name'];
+	if (preg_match ('/^[A-Z \'.-]{2,40}$/i', $trimmed['registerLastName'])) {
+		$last_name = $trimmed['registerLastName'];
 	} else {
 		echo '<p class="error">Please enter your last name!</p>';
 	}
 	
 	// Check for an email address:
-	if (preg_match ('/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/', $trimmed['email'])) {
-		$email = $trimmed['email'];
+	if (preg_match ('/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/', $trimmed['registerEmail'])) {
+		$email = $trimmed['registerEmail'];
 	} else {
 		echo '<p class="error">Please enter a valid email address!</p>';
 	}
 
 	// Check for a password and match against the confirmed password:
-	if (preg_match ('/^\w{4,20}$/', $trimmed['password1']) ) {
-		if ($trimmed['password1'] == $trimmed['password2']) {
-			$password = $trimmed['password1'];
+	if (preg_match ('/^\w{4,20}$/', $trimmed['password']) ) {
+		if ($trimmed['password'] == $trimmed['confirmedPassword']) {
+			$password = $trimmed['password'];
 		} else {
 			echo '<p class="error">Your password did not match the confirmed password!</p>';
 		}
@@ -50,9 +51,8 @@ if (isset($_POST['submit'])) { // Handle the form.
 	}
 	
 	if ($first_name && $last_name && $email && $password) { // If everything's OK...
-		  
 		//Query to check if the email address is available:
-		$query_email = "SELECT user_id FROM users_table WHERE email='$email'";
+		$query_email = "SELECT user_id FROM owners WHERE email='$email'";
 		try {
 			$pdo = new PDO($dsn, $dbUser, $dbPassword);
 		}
@@ -90,7 +90,7 @@ if (isset($_POST['submit'])) { // Handle the form.
 function add_user($pdo, $email, $hash, $first_name, $last_name, $registration_date)
 {
   //PHP Supports executing a prepared statement, which is used to execute the same statement repeatedly with high efficiency.
-  $stmt = $pdo->prepare('INSERT INTO users_table(first_name, last_name, email, pass, registration_date) VALUES(?,?,?,?,?)');
+  $stmt = $pdo->prepare('INSERT INTO owners(first_name, last_name, email, pass, registration_date) VALUES(?,?,?,?,?)');
   //Binds variables to a prepared statement as parameters
   //PARAM_STR: Used to represents the SQL CHAR, VARCHAR, or other string data type
   //$stmt->bindParam($first_name, $last_name, $email, $hash, $registration_date);
@@ -104,25 +104,8 @@ function add_user($pdo, $email, $hash, $first_name, $last_name, $registration_da
 	return true;
   else 
 	return false;
-  //echo "<h3>User " . $last_name . " has been added to the database successfully.</h3>";
 }
 ?>
-	
-
-<h2>Register</h2>
-<form>
-    <p>First Name: <input type="text" name="registerFirstName" value="<?php if (isset($trimmed['first_name'])) echo $trimmed['first_name']; ?>"></p>
-    <p>Last Name: <input type="text" name="registerLastName" value="<?php if (isset($trimmed['last_name'])) echo $trimmed['last_name']; ?>"></p>
-    <p>E-Mail Address: <input type="text" name = "registerEmail" value="<?php if (isset($trimmed['email'])) echo $trimmed['email']; ?>"></p>
-    <p>Create a Password: <input type = "text" name = "password"></p>
-    <p>Confirm Password: <input type = "text" name = "confirmedPassword"></p>
-    <p><i>(Passwords are case-sensitive and must be at least 6 characters long)</i></p>
-    <div class="button-container">
-        <button type="submit" value="register">Register</button>
-        <button type="reset" value="reset">Reset Form</button>
-    </div>
-    <hr>
-</form>
 
 <?php // Include the HTML footer.
 include ('footer.html');
