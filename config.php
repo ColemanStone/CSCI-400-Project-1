@@ -10,7 +10,7 @@
 // ********************************** //
 // ************ SETTINGS ************ //
 
-//Fefine some important constants:
+//Define some important constants:
 
 //Flag for site status:
 define('LIVE', FALSE);
@@ -19,7 +19,7 @@ define('LIVE', FALSE);
 define('EMAIL', 'Insert Real Admin Email Address Here');
 
 // Site URL (base for all redirections):
-define ('BASE_URL', 'http://localhost/m7-9/case');
+define ('BASE_URL', 'https://ko-turing3.ads.iu.edu/~benearl/Project%201/');
 
 // Location of the MySQL connection script:
 define ('MYSQL_CONNECT', 'mysql_connect.php');
