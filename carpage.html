@@ -1,31 +1,125 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <title>Car Page</title>
 </head>
+
 <body>
-    <form action="carpage.php" method="POST"> 
+    <form action="carpage.php" method="POST">
         <h1>Get your car value</h1>
         <h2>Select the make, model, and year of your car</h2>
         <p>Enter the vin number attached to the car</p>
-        <input type="text" name ="vinNum" placeholder="VIN Number">
+        <input type="text" name="vinNum" placeholder="VIN Number">
         <p>Enter the make of your vehicle</p>
-        <input type="text" name ="make" placeholder="Make">
+        <select name="make">
+            <option value="select" selected>Select</option>
+            <option value="ford">Ford</option>
+            <option value="chevy">Chevy</option>
+            <option value="toyota">Toyota</option>
+            <option value="honda">Honda</option>
+            <option value="nissan">Nissan</option>
+        </select>
         <p>Enter the model of your vehicle</p>
-        <input type="text" name ="model" placeholder="Model">
+        <select name="model">
+            <option value="select" selected>Select</option>
+            <!--Ford Models-->
+            <option value="f150">F150</option>
+            <option value="explorer">Explorer</option>
+            <option value="escape">Escape</option>
+            <option value="mustang">Mustang</option>
+            <!--Chevy Models-->
+            <option value="silverado">Silverado</option>
+            <option value="cruze">Cruze</option>
+            <option value="malibu">Malibu</option>
+            <option value="impala">Impala</option>
+            <!--Toyota Models-->
+            <option value="camry">Camry</option>
+            <option value="corolla">Corolla</option>
+            <option value="tacoma">Tacoma</option>
+            <option value="rav4">Rav4</option>
+            <!--Honda Models-->
+            <option value="accord">Accord</option>
+            <option value="civic">Civic</option>
+            <option value="crv">CRV</option>
+            <option value="pilot">Pilot</option>
+            <!--Nissan Models-->
+            <option value="altima">Altima</option>
+            <option value="maxima">Maxima</option>
+            <option value="sentra">Sentra</option>
+            <option value="rogue">Rogue</option>
+        </select>
         <p>Enter the year of your vehicle</p>
-        <input type="text" name ="year" placeholder="Year">
+        <input type="text" name="year" placeholder="Year">
         <p>Enter the date you purchased the car</p>
-        <input type="text" name ="datePurchased" placeholder="Purchase Date">
+        <input type="text" name="datePurchased" placeholder="Purchase Date">
         <p>Enter the retail price of the car</p>
-        <input type="text" name ="retailPrice" placeholder="Retail Price">
+        <input type="text" name="retailPrice" placeholder="Retail Price">
     </form>
     <button type="submit" name="submit" value="submit">Submit</button>
+    <button type="reset" name="reset" value="reset">Reset</button>
+    <button type="history" name="history" value="history">History</button>
 
     <h2>Estimated Car Value: </h2>
     <p>This is where the car value would go</p>
-    
+
+
+    <script>
+        window.onload = function () {
+            var makeSelect = document.querySelector('select[name="make"]');
+            var modelSelect = document.querySelector('select[name="model"]');
+            var form = document.querySelector('form');
+
+            form.addEventListener('submit', function (event) {
+                // Check if make is selected
+                if (makeSelect.value === '') {
+                    alert('Please select a make');
+                    event.preventDefault();
+                    return;
+                }
+
+                // Check if model is selected
+                if (modelSelect.value === '') {
+                    alert('Please select a model');
+                    event.preventDefault();
+                    return;
+                }
+            });
+
+            makeSelect.addEventListener('change', function () {
+                // Define the models for each make
+                var models = {
+                    ford: ['f150', 'explorer', 'escape', 'mustang'],
+                    chevy: ['silverado', 'cruze', 'malibu', 'impala'],
+                    toyota: ['camry', 'corolla', 'tacoma', 'rav4'],
+                    honda: ['accord', 'civic', 'crv', 'pilot'],
+                    nissan: ['altima', 'maxima', 'sentra', 'rogue']
+                };
+
+                // Get the selected make
+                var selectedMake = makeSelect.value;
+
+                // Get the models for the selected make
+                var selectedModels = models[selectedMake];
+
+                // Loop through all options and disable those not in the selected make
+                for (var i = 0; i < modelSelect.options.length; i++) {
+                    var option = modelSelect.options[i];
+                    if (selectedModels.indexOf(option.value) === -1) {
+                        option.disabled = true;
+                        option.style.color = 'gray';
+                    } else {
+                        option.disabled = false;
+                        option.style.color = 'black';
+                    }
+                }
+            });
+        };
+    </script>
+
+
 </body>
+
 </html>

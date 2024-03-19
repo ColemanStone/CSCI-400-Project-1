@@ -101,3 +101,17 @@ img{
 .error{
     color: rgb(209, 62, 62);
 }
+
+select {
+    width: 200px;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+select option {
+    padding: 10px;
+}
