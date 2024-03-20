@@ -6,7 +6,7 @@ CREATE TABLE cars (
     model VARCHAR(80) NOT NULL,
     carYear YEAR UNSIGNED NOT NULL,
     date_purchased DATE NOT NULL,
-    retail_price DECIMAL UNSIGNED NOT NULL,
     miles_driven INT UNSIGNED NOT NULL,
+    car_condition VARCHAR(20) NOT NULL,
     PRIMARY KEY (vin)
 );

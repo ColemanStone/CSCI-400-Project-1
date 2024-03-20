@@ -8,9 +8,8 @@
 </head>
 
 <body>
-    <form action="carpage.php" method="POST">
+    <form action="carpage.php" method="post">
         <h1>Get your car value</h1>
-        <h2>Select the make, model, and year of your car</h2>
         <p>Enter the vin number attached to the car</p>
         <input type="text" name="vinNum" placeholder="VIN Number">
         <p>Enter the make of your vehicle</p>
@@ -56,15 +55,15 @@
         <p>Enter the date you purchased the car</p>
         <input type="text" name="datePurchased" placeholder="Purchase Date">
         <p>Enter the retail price of the car</p>
-        <input type="text" name="retailPrice" placeholder="Retail Price">
+        <input type="text" name="retailPrice" placeholder="Retail Price"></br>
+        <p>Enter the number miles driven on the car</p>
+        <input type="text" name="milesDriven" placeholder="Miles Driven"></br>
+
+        
+        <button type="submit" name="submit" value="submit">Submit</button>
+        <button type="reset" name="reset" value="reset">Reset</button>
+        <button type="history" name="history" value="history">History</button>
     </form>
-    <button type="submit" name="submit" value="submit">Submit</button>
-    <button type="reset" name="reset" value="reset">Reset</button>
-    <button type="history" name="history" value="history">History</button>
-
-    <h2>Estimated Car Value: </h2>
-    <p>This is where the car value would go</p>
-
 
     <script>
         window.onload = function () {
