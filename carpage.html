@@ -14,7 +14,7 @@
         <input type="text" name="vinNum" placeholder="VIN Number">
         <p>Enter the make of your vehicle</p>
         <select name="make">
-            <option value="select" selected>Select</option>
+            <option value="default" selected>Select</option>
             <option value="ford">Ford</option>
             <option value="chevy">Chevy</option>
             <option value="toyota">Toyota</option>
@@ -82,6 +82,9 @@
             var modelSelect = document.querySelector('select[name="model"]');
             var form = document.querySelector('form');
 
+            // Disable the model select box by default
+            modelSelect.disabled = true;
+
             form.addEventListener('submit', function (event) {
                 // Check if make is selected
                 if (makeSelect.value === '') {
@@ -101,6 +104,7 @@
             makeSelect.addEventListener('change', function () {
                 // Define the models for each make
                 var models = {
+                    default:['select'],
                     ford: ['f150', 'explorer', 'escape', 'mustang'],
                     chevy: ['silverado', 'cruze', 'malibu', 'impala'],
                     toyota: ['camry', 'corolla', 'tacoma', 'rav4'],
@@ -110,6 +114,13 @@
 
                 // Get the selected make
                 var selectedMake = makeSelect.value;
+                // If a make is selected, enable the model select box
+                if (selectedMake !== 'default') {
+                    modelSelect.disabled = false;
+                } else {
+                    modelSelect.disabled = true;
+                }
+
 
                 // Get the models for the selected make
                 var selectedModels = models[selectedMake];
