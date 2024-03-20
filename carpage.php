@@ -53,12 +53,16 @@ if (isset($_POST['submit'])) {
             $sellPrice = $sellPrice * 0.95;
         }
         
-        $updatedRetailPrice = $sellPrice;
-        $updatedPrivatePrice = $updatedRetailPrice * 1.15;
-        $updatedPreOwnedPrice = $updatedPrivatePrice * 1.1;
+        $updatedRetailPrice = round($sellPrice,0);
+        $updatedPrivatePrice = round($updatedRetailPrice * 1.15,0);
+        $updatedPreOwnedPrice = round($updatedPrivatePrice * 1.1,0);
+
+        $query_updatePrices = "UPDATE owners_cars SET private_price = '$updatedPrivatePrice', retail_price = '$updatedRetailPrice', pre_owned_price = '$updatedPreOwnedPrice' WHERE vid = '$vin'";
+
+        $result = $pdo->query($query_updatePrices);
 
         echo "<h2>Estimated Car Value: </h2>";
-        echo "<p>Based on the information provided, your $year " . ucfirst($make) . " " . ucfirst($model) . " is worth $$updatedRetailPrice if you sell it to a dealership,
+        echo "<p>Based on the information provided, your $year " . ucfirst($make) . " " . ucfirst($model) . " that you bought for $$retailPrice is is worth $$updatedRetailPrice if you sell it to a dealership,
                 $$updatedPrivatePrice if you sell it to a private owner, and $$updatedPreOwnedPrice as the certified pre-owned car price.</p>";
 
         include ('footer.html'); 
