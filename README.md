@@ -12,7 +12,7 @@ feature of our website is providing a way for users to see the history of all th
 <p>The most difficult thing we encountered on the backend side of the building of this website was getting necessary values from both the cars database and the owners_cars database. The solution was to get the vin number from owners_cars, and then use that vin to get make, model, and year of the vehicles in order to display the history.</p>
 
 <h3>Design Challenges (Frontend)</h3>
-<p></p>
+<p>The most difficult part abouy developing the front end was getting all the information to look neat on the screen and readable for the user. And to make the instructions on pages to be clear and readable so the user can nagivate the website without any problem</p>
 
 <h3>Features Missing/Not Fully Functional</h3>
 <p>Due to needing unique vin numbers, trying to revaluate a car will not work, as the new car will not be added to the database.</p>
