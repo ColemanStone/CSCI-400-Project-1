@@ -16,61 +16,104 @@ if (isset($_POST['submit'])) {
 	require (MYSQL_CONNECT);
 	$trimmed = array_map('trim', $_POST);
 
-    $vin = $trimmed['vinNum'];
-    $make = $trimmed['make'];
-    $model = $trimmed['model'];
-    $year = $trimmed['year'];
-    $datePurchased = $trimmed['datePurchased'];
-    $retailPrice = $trimmed['retailPrice'];
-    $milesDriven = $trimmed['milesDriven'];
+    $error = true;
+
+    if(!empty($_POST['vinNum']))
+        $vin = $trimmed['vinNum'];
+    else 
+        $vin = null;
+    $make = $_POST['make'];
+    if($make == 'default'){
+        $make = 'Select';
+    }
+    $model = $_POST['model'];
+    if($model == ''){
+        $model = 'Select';
+    }
+    if(!empty($_POST['year']))
+        $year = $trimmed['year'];
+    else
+        $year = null;
+        
+    if(!empty($_POST['datePurchased']))
+        $datePurchased = $trimmed['datePurchased'];
+    else
+        $datePurchased = null;
+    if(!empty($_POST['retailPrice']))
+        $retailPrice = $trimmed['retailPrice'];
+    else
+        $retailPrice = null;
+    if(!empty($_POST['milesDriven']))
+        $milesDriven = $trimmed['milesDriven'];
+    else
+        $milesDriven = null;
+    $carCondition = $_POST['condition'];
     $privatePrice = $retailPrice * 1.15;
     $preOwnedPrice = $privatePrice * 1.1;
-    $carCondition = "fair";
 
     $ownerID = htmlspecialchars($_SESSION['user_id']);
-    
-    if (add_car($pdo, $vin, $make, $model, $year, $datePurchased, $milesDriven, $carCondition)
-        && add_owners_cars($pdo, $ownerID, $vin, $privatePrice, $retailPrice, $preOwnedPrice)) { // If it ran OK.
-        // Finish the page:
-        if($carCondition == "fair"){
-            $sellPrice = $retailPrice * 0.85;
-        } else if($carCondition == "good"){
-            $sellPrice = $retailPrice * 0.9;
-        } else if($carCondition == "very good"){
-            $sellPrice = $retailPrice * 0.95;
-        }
-        else {
-            $sellPrice = $retailPrice;
-        }
 
-        if($milesDriven >= 150000){
-            $sellPrice = $sellPrice * 0.8;
-        } else if($milesDriven >= 120000){
-            $sellPrice = $sellPrice * 0.85;
-        } else if($milesDriven >= 80000){
-            $sellPrice = $sellPrice * 0.9;
-        } else if($milesDriven >= 40000){
-            $sellPrice = $sellPrice * 0.95;
-        }
-        
-        $updatedRetailPrice = round($sellPrice,0);
-        $updatedPrivatePrice = round($updatedRetailPrice * 1.15,0);
-        $updatedPreOwnedPrice = round($updatedPrivatePrice * 1.1,0);
+    $checkVin = validateVin($vin);
+    $checkMake = validateMake($make);
+    $checkModel = validateModel($model);
+    $checkYear = validateYear($year);
+    $checkDate = validateDate($datePurchased);
+    $checkPrice = validatePrice($retailPrice);
+    $checkMilesDriven = validateMilesDriven($milesDriven);
+    $checkCondition = validateCondition($carCondition);
 
-        $query_updatePrices = "UPDATE owners_cars SET private_price = '$updatedPrivatePrice', retail_price = '$updatedRetailPrice', pre_owned_price = '$updatedPreOwnedPrice' WHERE vid = '$vin'";
-
-        $result = $pdo->query($query_updatePrices);
-
-        echo "<h2>Estimated Car Value: </h2>";
-        echo "<p>Based on the information provided, your $year " . ucfirst($make) . " " . ucfirst($model) . " that you bought for $$retailPrice is is worth $$updatedRetailPrice if you sell it to a dealership,
-                $$updatedPrivatePrice if you sell it to a private owner, and $$updatedPreOwnedPrice as the certified pre-owned car price.</p>";
-
-        include ('footer.html'); 
-        exit(); // Stop the page.
-        
-    } else { // If it did not run OK.
-        echo '<p class="error">Your car could not be valuated due to a system error!</p>';
+    if($checkVin && $checkMake && $checkModel && $checkYear && $checkDate && $checkPrice
+        && $checkMilesDriven && $checkCondition){
+        $error = false;
     }
+
+    if(!$error){
+        if (add_car($pdo, $vin, $make, $model, $year, $datePurchased, $milesDriven, $carCondition)
+        && add_owners_cars($pdo, $ownerID, $vin, $privatePrice, $retailPrice, $preOwnedPrice)) { // If it ran OK.
+            // Finish the page:
+            if($carCondition == "fair"){
+                $sellPrice = $retailPrice * 0.85;
+            } else if($carCondition == "good"){
+                $sellPrice = $retailPrice * 0.9;
+            } else if($carCondition == "very good"){
+                $sellPrice = $retailPrice * 0.95;
+            }
+            else {
+                $sellPrice = $retailPrice;
+            }
+
+            if($milesDriven >= 150000){
+                $sellPrice = $sellPrice * 0.8;
+            } else if($milesDriven >= 120000){
+                $sellPrice = $sellPrice * 0.85;
+            } else if($milesDriven >= 80000){
+                $sellPrice = $sellPrice * 0.9;
+            } else if($milesDriven >= 40000){
+                $sellPrice = $sellPrice * 0.95;
+            }
+            
+            $updatedRetailPrice = round($sellPrice,0);
+            $updatedPrivatePrice = round($updatedRetailPrice * 1.15,0);
+            $updatedPreOwnedPrice = round($updatedPrivatePrice * 1.1,0);
+
+            $query_updatePrices = "UPDATE owners_cars SET private_price = '$updatedPrivatePrice', retail_price = '$updatedRetailPrice', pre_owned_price = '$updatedPreOwnedPrice' WHERE vid = '$vin'";
+
+            $result = $pdo->query($query_updatePrices);
+
+            echo "<h2>Estimated Car Value: </h2>";
+            echo "<p>Based on the information provided, your $year " . ucfirst($make) . " " . ucfirst($model) . " that you bought for $$retailPrice is is worth $$updatedRetailPrice if you sell it to a dealership,
+                    $$updatedPrivatePrice if you sell it to a private owner, and $$updatedPreOwnedPrice as the certified pre-owned car price.</p>";
+
+            include ('footer.html'); 
+            exit(); // Stop the page.
+            
+        } else { // If it did not run OK.
+            echo '<p class="error">Your car could not be valuated due to a system error!</p>';
+        }
+    } else {
+        echo "<br><p class='error'>You must fix your inputs. Try again</p>";
+    }
+    
 }
 
 if(isset($_POST['history'])){
@@ -156,6 +199,78 @@ function add_owners_cars($pdo, $ownerID, $vin, $privatePrice, $retailPrice, $pre
         return true;
     else
         return false;
+}
+
+function validateVin($vin){
+    if(!empty($vin) && ctype_alnum($vin)){
+        return true;
+    } else{
+        print("<br>Invalid vin");
+        return false;
+    }
+}
+
+function validateMake($make){
+    if($make != "Select"){
+        return true;
+    } else{
+        print("<br>You must select a make");
+        return false;
+    }
+}
+
+function validateModel($model){
+    if($model != "Select"){
+        return true;
+    } else{
+        print("<br>You must select a model");
+        return false;
+    }
+}
+
+function validateYear($year){
+    if(!empty($year) && (preg_match('/^[0-9]{4}$/i', $year))) {
+        return true;
+    } else{
+        print("<br>Invalid year");
+        return false;
+    }
+}
+
+function validateDate($datePurchased){
+    if(!empty($datePurchased) && (preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/i', $datePurchased))) {
+        return true;
+    } else{
+        print("<br>Invalid date");
+        return false;
+    }
+}
+
+function validatePrice($retailPrice){
+    if(!empty($retailPrice) && (preg_match('/^[0-9]*$/i', $retailPrice))) {
+        return true;
+    } else{
+        print("<br>Invalid price");
+        return false;
+    }
+}
+
+function validateMilesDriven($milesDriven){
+    if(!empty($milesDriven) && (preg_match('/^[0-9]{1,7}$/i', $milesDriven))) {
+        return true;
+    } else{
+        print("<br>Invalid number of miles driven");
+        return false;
+    }
+}
+
+function validateCondition($carCondition){
+    if($carCondition != "select"){
+        return true;
+    } else{
+        print("<br>You must fill in a condition");
+        return false;
+    }
 }
 
 ?>

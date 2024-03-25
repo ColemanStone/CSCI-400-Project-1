@@ -46,6 +46,7 @@ if (isset($_POST['submit'])) {
 			$_SESSION['name'] = $row[1];
 			echo htmlspecialchars("Hi $row[1], you are now logged in as '$row[2]'");
 			$displayForm = false;
+			
 
 		  }	else { // No match was made.
 				echo '<p class="error">Either the email address and password entered do not match those on file or you have no account yet.</p>';
