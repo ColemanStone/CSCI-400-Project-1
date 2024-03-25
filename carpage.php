@@ -48,6 +48,10 @@ if (isset($_POST['submit'])) {
     else
         $milesDriven = null;
     $carCondition = $_POST['condition'];
+    if(isset($_POST['addon']))
+        $addon = $_POST['addon'];
+    else 
+        $addon = null;
     $privatePrice = $retailPrice * 1.15;
     $preOwnedPrice = $privatePrice * 1.1;
 
@@ -69,13 +73,12 @@ if (isset($_POST['submit'])) {
 
     if(!$error){
         if (add_car($pdo, $vin, $make, $model, $year, $datePurchased, $milesDriven, $carCondition)
-        && add_owners_cars($pdo, $ownerID, $vin, $privatePrice, $retailPrice, $preOwnedPrice)) { // If it ran OK.
-            // Finish the page:
+        && add_owners_cars($pdo, $ownerID, $vin, $privatePrice, $retailPrice, $preOwnedPrice)) { 
             if($carCondition == "fair"){
                 $sellPrice = $retailPrice * 0.85;
             } else if($carCondition == "good"){
                 $sellPrice = $retailPrice * 0.9;
-            } else if($carCondition == "very good"){
+            } else if($carCondition == "veryGood"){
                 $sellPrice = $retailPrice * 0.95;
             }
             else {
@@ -91,7 +94,17 @@ if (isset($_POST['submit'])) {
             } else if($milesDriven >= 40000){
                 $sellPrice = $sellPrice * 0.95;
             }
+
+            if(!empty($addon)){
+                $sellPrice += 50;
+            }
             
+            /*if(sizeof($addon) > 0){
+                foreach($addon as $value){
+                    $sellPrice += 50;
+                }
+            }*/
+
             $updatedRetailPrice = round($sellPrice,0);
             $updatedPrivatePrice = round($updatedRetailPrice * 1.15,0);
             $updatedPreOwnedPrice = round($updatedPrivatePrice * 1.1,0);
