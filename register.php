@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) { // Handle the form.
 	}
 
 	// Check for a password and match against the confirmed password:
-	if (preg_match ('/^\w{4,20}$/', $trimmed['password']) ) {
+	if (preg_match ('/^\w{6}$/', $trimmed['password']) ) {
 		if ($trimmed['password'] == $trimmed['confirmedPassword']) {
 			$password = $trimmed['password'];
 		} else {

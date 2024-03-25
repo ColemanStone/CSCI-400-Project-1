@@ -17,15 +17,12 @@ include ('header.html');
 include ('forgot_password.html');
 
 if(isset($_POST['submit'])){
-    print("here");
     require_once (MYSQL_CONNECT);
     $trimmed = array_map('trim', $_POST);
 
     $loginEmail = $trimmed['loginEmail'];
-    print($loginEmail);
 
     $query_email = "SELECT pass from owners WHERE email='$loginEmail'";
-    print($query_email);
 
     try {
         $pdo = new PDO($dsn, $dbUser, $dbPassword);
@@ -40,13 +37,14 @@ if(isset($_POST['submit'])){
     }
         
     if ($result->rowCount() == 1) {
-        $query_change = "UPDATE owners SET pass='temporary' WHERE email='$loginEmail'";
-        print($query_change);
+        $hash = password_hash('temporary', PASSWORD_DEFAULT);
+        $query_change = "UPDATE owners SET pass='$hash' WHERE email='$loginEmail'";
 
         $result = $pdo->query($query_change);
 
         print("<p>Your password has been set as \"temporary\". Make sure to
             go to the change password page to set a new permanent password!</p>");
+        include ('footer.html');
     }
 }
 

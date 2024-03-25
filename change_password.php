@@ -17,6 +17,8 @@ if (!isset($_SESSION['name'])) {
 	$name = htmlspecialchars($_SESSION['name']);
 	echo "<h1> Password Change for $name </h1>";
 	echo "\n\n\n";
+
+	$displayForm = true;
 }
 
 if (isset($_POST['submit'])) {
@@ -25,26 +27,28 @@ if (isset($_POST['submit'])) {
 	require_once (MYSQL_CONNECT);
 	$trimmed = array_map('trim', $_POST);
 
-	/*$id = $_SESSION['id'];
-	print($id);
+	$id = $_SESSION['user_id'];
 
 	$query_user = "SELECT pass FROM owners WHERE user_id='$id'";
-	print($query_user);
 	$result = $pdo->query($query_user);
-
-	print($result);*/
 
 	$newPassword = $trimmed['newpass'];
 	$confirmNewPassword = $trimmed['confirmnewpass'];
 
-	if(($newPassword == $confirmNewPassword)){
-		$valid = true;
+	if (preg_match ('/^\w{6}$/', $newPassword) ) {
+		if ($newPassword == $confirmNewPassword) {
+			$password = $newPassword;
+			$valid = true;
+		} else {
+			echo '<p class="error">Your password did not match the confirmed password!</p>';
+		}
 	} else {
-		echo "<p class='error'>Passwords don't match</p>";
+		echo '<p class="error">Please enter a valid password!</p>';
 	}
 
 	if($valid){
-		$query = "UPDATE owners SET pass=$newPassword WHERE first_name=$name";
+		$hash = password_hash($password, PASSWORD_DEFAULT);
+		$query = "UPDATE owners SET pass='$hash' WHERE user_id='$id'";
 		print($query);
 
 		try {
@@ -54,23 +58,23 @@ if (isset($_POST['submit'])) {
 		  die("Fatal Error - Could not connect to the database" . "</body></html>" );
 		}
 
-		$result = $pdo->query($query);
-
-		if (!$result->rowCount()) {
-			print("Password successfully changed to ". $newPassword);
-		}
-		else{
-			print("fail");
+		try{
+			$result = $pdo->query($query);
+			print("Password changed successfully");
+			$displayForm = false;
+		} catch(Exception $e){
+			print("<p>Password could not be changed. Please try again</p>");
+			$displayForm = true;
 		}
 	}
 }
-
-?>
-<form action="change_password.php" method="post">
+if($displayForm){
+	?>
+	<form action="change_password.php" method="post">
 	<fieldset>
 	<div class="myRow">
 		<label class="labelCol" for="newpass">New Password</label> 
-		<input type="password" name="newpass" size="20" maxlength="20" /> <small>Use only letters, numbers, and the underscore. Must be between 4 and 20 characters long.</small>
+		<input type="password" name="newpass" size="20" maxlength="20" /> <small>Use only letters, numbers, and the underscore. Must be at least 6 characters long.</small>
 	</div>
 	<div class="myRow">
 		<label class="labelCol" for="newpassc">Confirm New Password</label> 
@@ -84,5 +88,6 @@ if (isset($_POST['submit'])) {
 </form>
 
 <?php
+}
 include ('footer.html');
 ?>
